@@ -28,7 +28,9 @@ function App() {
 
   if (location == false) {
     return (
-      alert('a localização precisa estar ativa no browser para continuar')
+      <div>
+        Para usar a aplicação é preiso estar ativo a localização do browser.
+      </div>
     );
   } else if (weather == false) {
     return (
@@ -41,8 +43,7 @@ function App() {
     return (
       <div className='container'>
         <header className='cabecalho'>
-          <h1 className='title'>Clima em {weather['name']} ({weather['weather'][0]['description']}) </h1>
-          <hr />
+          <h1 className='title'>Clima em {weather['name']}: {weather['weather'][0]['description']} </h1>
         </header>
         <main>
         <ul className='lista'>
