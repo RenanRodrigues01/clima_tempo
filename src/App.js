@@ -13,7 +13,7 @@ function App() {
   }
 
   let handleSearch = async () => {
-    let res = await axios.get(`http://api.weatherapi.com/v1/current.json?key=3013423d5103479cb67235302220611&q=${city}&lang=pt/`);
+    let res = await axios.get(`http://api.weatherapi.com/v1/current.json?key=3013423d5103479cb67235302220611&q=${city}&lang=pt`);
     setWeatherForecast(res.data);
   }
 
@@ -37,13 +37,13 @@ function App() {
     })
   }, []);
 
-  if (location == false) {
+  if (location === false) {
     return (
       <div>
         Para usar a aplicação é preiso estar ativo a localização do browser.
       </div>
     );
-  } else if (weather == false) {
+  } else if (weather === false) {
     return (
       <div>
         Carregando...
@@ -81,7 +81,7 @@ function App() {
             {weatherForecast ? (
               <div>
                 <div className='iconInformation'>
-                  <img src={weatherForecast.current.condition.icon}/>
+                  <img src={weatherForecast.current.condition.icon} alt='weather forecast image'/>
                   <h3 className='title-user'>Hoje o dia em {weatherForecast.location.name}, está: {weatherForecast.current.condition.text}</h3>
                 </div>
                 <ul className='list-user'>
