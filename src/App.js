@@ -15,7 +15,6 @@ function App() {
   let handleSearch = async () => {
     let res = await axios.get(`http://api.weatherapi.com/v1/current.json?key=3013423d5103479cb67235302220611&q=${city}&lang=pt`);
     setWeatherForecast(res.data);
-    console.log(res.data)
   }
 
   let getWeather = async (lat, long) => {
@@ -58,34 +57,39 @@ function App() {
         </header>
         <main className='principal'>
           <article className='openWeather'>
-            <h2 className='title-openWeather'>Tempo na sua localização: {weather['weather'][0]['description']} </h2>
-            <ul className='lista'>
-              <li className='lista-item'>Temperatura Atual: {weather['main']['temp']}°</li>
-              <li className='lista-item'>Temperatura maxima: {weather['main']['temp_max']}°</li>
-              <li className='lista-item'>Temperatura minima: {weather['main']['temp_min']}°</li>
-              <li className='lista-item'>Seansação térmica: {weather['main']['feels_like']}°</li>
-              <li className='lista-item'>Pressão: {weather['main']['pressure']}hpa</li>
-              <li className='lista-item'>Umidade: {weather['main']['humidity']}%</li>
+            <h2 className='title-openWeather'>Condições em {weather['name']} : {weather['weather'][0]['description']} </h2>
+            <ul className='list'>
+              <li className='list-item'>Temperatura Atual: {weather['main']['temp']}°</li>
+              <li className='list-item'>Temperatura maxima: {weather['main']['temp_max']}°</li>
+              <li className='list-item'>Temperatura minima: {weather['main']['temp_min']}°</li>
+              <li className='list-item'>Seansação térmica: {weather['main']['feels_like']}°</li>
+              <li className='list-item'>Pressão: {weather['main']['pressure']} hpa</li>
+              <li className='list-item'>Umidade: {weather['main']['humidity']} %</li>
             </ul>
           </article>
           <article className='weatherForecast'>
             <h2 className='title-weatherForecast'>Verifique a previsão do tempo em outras cidades</h2>
             <p className='text'>Digite o nome da cidade no campo abaixo e em seguida clique em pesquisar</p>
             <div>
-              <input
+              <input className='handleChange'
                 onChange={handleChange}
                 value={city} />
             </div>
-            <button onClick={handleSearch}>
-              pesquisar
+            <button className='button' onClick={handleSearch}>
+              Pesquisar
             </button>
             {weatherForecast ? (
               <div>
-                <h3>Hoje o dia em {weatherForecast.location.name}, está: {weatherForecast.current.condition.text}</h3>
-                <ul>
-                  <li>Temperatura Atual: {weatherForecast.current.temp_c}°</li>
-                  <li></li>
-                  <li></li>
+                <div className='iconInformation'>
+                  <img src={weatherForecast.current.condition.icon}/>
+                  <h3 className='title-user'>Hoje o dia em {weatherForecast.location.name}, está: {weatherForecast.current.condition.text}</h3>
+                </div>
+                <ul className='list-user'>
+                  <li className='list-user-item'>Temperatura Atual: {weatherForecast.current.temp_c}°</li>
+                  <li className='list-user-item'>Seansação térmica: {weatherForecast.current.feelslike_c}°</li>
+                  <li className='list-user-item'>Ventos: {weatherForecast.current.wind_kph}kph</li>
+                  <li className='list-user-item'>Umidade: {weatherForecast.current.humidity}%</li>
+                  <li className='list-user-item'>Presão: {weatherForecast.current.pressure_mb} hpa</li>
                 </ul>
               </div>
             ) : null}
