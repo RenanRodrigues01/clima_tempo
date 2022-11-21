@@ -13,7 +13,7 @@ function App() {
   }
 
   let handleSearch = async () => {
-    let res = await axios.get(`http://api.weatherapi.com/v1/current.json?key=c91aefa8b299465b9fa233014222011&q=${city}&lang=pt`);
+    let res = await axios.get(`http://api.weatherapi.com/v1/current.json?key=940ccc29458847599d5135907222111&q=${city}&lang=pt`);
     setWeatherForecast(res.data);
   }
 
